@@ -1,13 +1,14 @@
 package com.dandaev.edu.udp.client;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.time.LocalDateTime;
 
 import com.dandaev.edu.entity.User;
+import com.dandaev.edu.utils.LocalDateTimeAdapter;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 public class UdpClient {
 	private static final String SERVER_HOST = "localhost";
@@ -16,7 +17,6 @@ public class UdpClient {
 	public static void main(String[] args) {
 		System.out.println("UDP Client starting...");
 
-		// Создаем тестовых пользователей
 		User[] testUsers = {
 				new User("john_doe", "john@example.com", 25, true),
 				new User("alice_smith", "alice@company.org", 30, true),
@@ -26,11 +26,18 @@ public class UdpClient {
 
 		try (DatagramSocket socket = new DatagramSocket()) {
 			InetAddress serverAddress = InetAddress.getByName(SERVER_HOST);
+			Gson gson = new GsonBuilder()
+					.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+					.create();
 
 			for (User user : testUsers) {
-				sendUserObject(socket, serverAddress, user);
+				String json = gson.toJson(user);
+				byte[] data = json.getBytes();
 
-				// Задержка между отправками
+				DatagramPacket packet = new DatagramPacket(data, data.length, serverAddress, SERVER_PORT);
+				socket.send(packet);
+
+				System.out.println("Sent JSON: " + json);
 				Thread.sleep(2000);
 			}
 
@@ -39,26 +46,5 @@ public class UdpClient {
 		} catch (Exception e) {
 			System.err.println("Client error: " + e.getMessage());
 		}
-	}
-
-	private static void sendUserObject(DatagramSocket socket, InetAddress address, User user)
-			throws IOException {
-
-		// Сериализация объекта в байты
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		ObjectOutputStream oos = new ObjectOutputStream(baos);
-		oos.writeObject(user);
-		oos.flush();
-
-		byte[] objectData = baos.toByteArray();
-
-		// Создание и отправка пакета
-		DatagramPacket packet = new DatagramPacket(objectData, objectData.length, address, SERVER_PORT);
-
-		socket.send(packet);
-
-		System.out.println("Sent user: " + user.getUsername() + " (" + objectData.length + " bytes)");
-
-		oos.close();
 	}
 }
