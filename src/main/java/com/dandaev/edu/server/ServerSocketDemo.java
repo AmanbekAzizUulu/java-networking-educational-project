@@ -1,4 +1,3 @@
-// ServerSocketDemo.java
 package com.dandaev.edu.server;
 
 import java.io.DataInputStream;
@@ -19,26 +18,30 @@ public class ServerSocketDemo {
                     var responseToClient = new DataOutputStream(acceptedClientSocket.getOutputStream());
                     var requestFromClient = new DataInputStream(acceptedClientSocket.getInputStream());
 
-                    // Читаем длину сообщения, затем само сообщение
+                    // Read message length
                     int messageLength = requestFromClient.readInt();
-                    byte[] buffer = new byte[messageLength];
+
+					// Read the message itself
+					byte[] buffer = new byte[messageLength];
                     requestFromClient.readFully(buffer);
                     String clientMessage = new String(buffer);
+
                     System.out.println("Received from client: " + clientMessage);
 
-                    // Отправляем ответ
+                    // Send response
                     String response = "hello from server!";
                     byte[] responseBytes = response.getBytes();
-                    responseToClient.writeInt(responseBytes.length); // Сначала длину
-                    responseToClient.write(responseBytes); // Затем данные
+
+                    responseToClient.writeInt(responseBytes.length); 	// First the length
+                    responseToClient.write(responseBytes); 			// Then the data
                     responseToClient.flush();
+
                     System.out.println("Response sent to client");
 
                 } catch (IOException e) {
                     System.err.println("Error handling client: " + e.getMessage());
                 }
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         }
