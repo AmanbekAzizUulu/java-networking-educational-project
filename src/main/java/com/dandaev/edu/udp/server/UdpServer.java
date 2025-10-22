@@ -8,6 +8,7 @@ import java.net.DatagramSocket;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import com.dandaev.edu.entity.Packet;
 import com.dandaev.edu.entity.User;
 import com.dandaev.edu.utils.LocalDateTimeAdapter;
 import com.google.gson.Gson;
@@ -16,7 +17,7 @@ import com.google.gson.GsonBuilder;
 public class UdpServer {
 	private static final int PORT = 8888;
 	private static final int BUFFER_SIZE = 4096;
-	private static final String LOG_FILE = "users.log";
+	private static final String LOG_FILE = "/src/main/resources/users.log";
 
 	public static void main(String[] args) {
 		System.out.println("UDP Server starting on port " + PORT);
@@ -31,17 +32,28 @@ public class UdpServer {
 			while (true) {
 				byte[] buffer = new byte[BUFFER_SIZE];
 				DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
-
 				socket.receive(packet);
 
+				String json = new String(packet.getData(), 0, packet.getLength());
 				String clientAddress = packet.getAddress().getHostAddress();
 				int clientPort = packet.getPort();
 
-				String json = new String(packet.getData(), 0, packet.getLength());
-				User receivedUser = gson.fromJson(json, User.class);
+				try {
+					Packet receivedPacket = gson.fromJson(json, Packet.class);
+					User user = receivedPacket.user;
 
-				displayUserInfo(receivedUser, clientAddress, clientPort);
-				logUserToFile(receivedUser);
+					displayUserInfo(user, clientAddress, clientPort);
+					logUserToFile(user);
+
+					// Отправляем ACK с ID пакета
+					String ack = "ACK:" + receivedPacket.id;
+					DatagramPacket ackPacket = new DatagramPacket(
+							ack.getBytes(), ack.getBytes().length, packet.getAddress(), packet.getPort());
+					socket.send(ackPacket);
+
+				} catch (Exception e) {
+					System.err.println("Invalid JSON from " + clientAddress + ": " + e.getMessage());
+				}
 			}
 
 		} catch (IOException e) {
@@ -63,7 +75,9 @@ public class UdpServer {
 	private static void logUserToFile(User user) {
 		try (PrintWriter writer = new PrintWriter(new FileWriter(LOG_FILE, true))) {
 			String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-			writer.printf("%s | %s | %s | %d | %s | %s%n", timestamp, user.getUsername(), user.getEmail(), user.getAge(), user.isActive(), user.getRegistrationDate());
+			writer.printf("%s | %s | %s | %d | %s | %s%n",
+					timestamp, user.getUsername(), user.getEmail(),
+					user.getAge(), user.isActive(), user.getRegistrationDate());
 			writer.flush();
 		} catch (IOException e) {
 			System.err.println("Error writing to log file: " + e.getMessage());
