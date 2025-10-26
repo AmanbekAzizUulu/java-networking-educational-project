@@ -1,0 +1,4 @@
+{
+  "action": "get_time",
+  "timezone": "UTC"
+}

@@ -1,0 +1,9 @@
+{
+  "name": "Test Object",
+  "value": 42,
+  "tags": ["test", "api", "json"],
+  "metadata": {
+    "created_by": "client",
+    "version": "1.0"
+  }
+}

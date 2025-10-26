@@ -1,0 +1,10 @@
+{
+  "name": "Get Server Time",
+  "method": "GET",
+  "url": "http://localhost:8080/time",
+  "headers": {
+    "User-Agent": "HttpClient/1.0",
+    "Accept": "application/json"
+  },
+  "timeout": 3000
+}

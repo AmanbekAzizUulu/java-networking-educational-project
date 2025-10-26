@@ -1,0 +1,16 @@
+{
+  "name": "Put Resource",
+  "method": "PUT",
+  "url": "http://localhost:8080/api/resources/123",
+  "headers": {
+    "User-Agent": "HttpClient/1.0",
+    "Content-Type": "application/json",
+    "Accept": "application/json"
+  },
+  "body": {
+    "name": "Updated Resource",
+    "description": "This resource was updated via PUT",
+    "version": 2
+  },
+  "timeout": 5000
+}

@@ -1,0 +1,10 @@
+{
+  "name": "Delete Resource",
+  "method": "DELETE",
+  "url": "http://localhost:8080/api/resources/456",
+  "headers": {
+    "User-Agent": "HttpClient/1.0",
+    "Accept": "application/json"
+  },
+  "timeout": 3000
+}

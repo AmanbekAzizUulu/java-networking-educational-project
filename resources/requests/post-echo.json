@@ -1,0 +1,8 @@
+{
+  "message": "Hello Server!",
+  "data": {
+    "user": "test_user",
+    "id": 12345,
+    "active": true
+  }
+}

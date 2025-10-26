@@ -1,0 +1,11 @@
+{
+  "resource": {
+    "id": 123,
+    "name": "Updated Resource Name",
+    "status": "active",
+    "properties": {
+      "color": "blue",
+      "size": "large"
+    }
+  }
+}
