@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://example.com/http-methods"
+	xmlns:hm="http://example.com/http-methods" elementFormDefault="qualified">
+
+	<xs:element name="httpMethods">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="method" type="hm:methodType" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="methodType">
+		<xs:sequence>
+			<xs:element name="description" type="xs:string"/>
+			<xs:element name="characteristics">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="characteristic" type="xs:string" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="request" type="hm:requestType"/>
+			<xs:element name="response" type="hm:responseType"/>
+			<xs:element name="useCases">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="useCase" type="xs:string" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="example" type="hm:exampleType"/>
+		</xs:sequence>
+		<xs:attribute name="name" type="hm:httpMethodType" use="required"/>
+	</xs:complexType>
+
+	<xs:simpleType name="httpMethodType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="GET"/>
+			<xs:enumeration value="POST"/>
+			<xs:enumeration value="PUT"/>
+			<xs:enumeration value="DELETE"/>
+			<xs:enumeration value="PATCH"/>
+			<xs:enumeration value="HEAD"/>
+			<xs:enumeration value="OPTIONS"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:complexType name="requestType">
+		<xs:sequence>
+			<xs:element name="body" type="xs:string"/>
+			<xs:element name="parameters" type="xs:string"/>
+			<xs:element name="headers">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="header" type="xs:string" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="responseType">
+		<xs:sequence>
+			<xs:element name="statusCodes">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="code" type="xs:string" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="body" type="xs:string"/>
+			<xs:element name="headers" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="header" type="xs:string" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="exampleType">
+		<xs:sequence>
+			<xs:element name="url" type="xs:string"/>
+			<xs:element name="request" type="hm:requestExampleType" minOccurs="0"/>
+			<xs:element name="response" type="hm:responseExampleType"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="requestExampleType">
+		<xs:sequence>
+			<xs:element name="contentType" type="xs:string" minOccurs="0"/>
+			<xs:element name="body" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="responseExampleType">
+		<xs:sequence>
+			<xs:element name="code" type="xs:string"/>
+			<xs:element name="contentType" type="xs:string" minOccurs="0"/>
+			<xs:element name="headers" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="header" type="hm:headerType" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="body" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="headerType">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="name" type="xs:string"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+</xs:schema>
