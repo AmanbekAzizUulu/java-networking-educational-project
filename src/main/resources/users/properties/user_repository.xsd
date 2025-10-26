@@ -1,0 +1,35 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+	<xs:element name="user.repository">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="users">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="user" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="id" type="xs:string"/>
+										<xs:element name="firstName" type="xs:string"/>
+										<xs:element name="lastName" type="xs:string"/>
+										<xs:element name="email" type="xs:string"/>
+										<xs:element name="address">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="street" type="xs:string"/>
+													<xs:element name="building" type="xs:string"/>
+													<xs:element name="apartment" type="xs:string"/>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+</xs:schema>

@@ -1,0 +1,14 @@
+<!ELEMENT userRepository (users)>
+<!ELEMENT users (user+)>
+
+<!ELEMENT user (firstName, lastName, email, address)>
+<!ATTLIST user
+          id CDATA #REQUIRED>
+
+<!ELEMENT firstName (#PCDATA)>
+<!ELEMENT lastName (#PCDATA)>
+<!ELEMENT email (#PCDATA)>
+<!ELEMENT address (street, building, apartment)>
+<!ELEMENT street (#PCDATA)>
+<!ELEMENT building (#PCDATA)>
+<!ELEMENT apartment (#PCDATA)>

@@ -1,0 +1,210 @@
+<?xml version="1.1" encoding="UTF-8"?>
+
+<!DOCTYPE userRepository SYSTEM "../properties/user_repository.dtd">
+
+<?xml-stylesheet href="../properties/user_repository.xsl" type="text/xsl"?>
+
+<userRepository>
+	<users>
+		<user id="1000">
+			<firstName>Amanbek</firstName>
+			<lastName>Dandaev</lastName>
+			<email>aibekdandaevv@gmail.com</email>
+			<address>
+				<street>Chuy</street>
+				<building>20</building>
+				<apartment>32</apartment>
+			</address>
+		</user>
+		<user id="1001">
+			<firstName>Meerim</firstName>
+			<lastName>Asanova</lastName>
+			<email>meerim.asanova@example.com</email>
+			<address>
+				<street>Toktogul</street>
+				<building>45</building>
+				<apartment>15</apartment>
+			</address>
+		</user>
+		<user id="1002">
+			<firstName>Bakyt</firstName>
+			<lastName>Jumaliev</lastName>
+			<email>bakyt.jumaliev@example.com</email>
+			<address>
+				<street>Manas</street>
+				<building>78</building>
+				<apartment>8</apartment>
+			</address>
+		</user>
+		<user id="1003">
+			<firstName>Gulnara</firstName>
+			<lastName>Ismailova</lastName>
+			<email>gulnara.ismailova@example.com</email>
+			<address>
+				<street>Lenina</street>
+				<building>33</building>
+				<apartment>21</apartment>
+			</address>
+		</user>
+		<user id="1004">
+			<firstName>Nurlan</firstName>
+			<lastName>Osmonov</lastName>
+			<email>nurlan.osmonov@example.com</email>
+			<address>
+				<street>Sovetskaya</street>
+				<building>12</building>
+				<apartment>7</apartment>
+			</address>
+		</user>
+		<user id="1005">
+			<firstName>Aizada</firstName>
+			<lastName>Ryskulova</lastName>
+			<email>aizada.ryskulova@example.com</email>
+			<address>
+				<street>Frunze</street>
+				<building>67</building>
+				<apartment>19</apartment>
+			</address>
+		</user>
+		<user id="1006">
+			<firstName>Ruslan</firstName>
+			<lastName>Abdyev</lastName>
+			<email>ruslan.abdyev@example.com</email>
+			<address>
+				<street>Gorkiy</street>
+				<building>89</building>
+				<apartment>11</apartment>
+			</address>
+		</user>
+		<user id="1007">
+			<firstName>Madina</firstName>
+			<lastName>Sultanova</lastName>
+			<email>madina.sultanova@example.com</email>
+			<address>
+				<street>Ahunbaeva</street>
+				<building>54</building>
+				<apartment>25</apartment>
+			</address>
+		</user>
+		<user id="1008">
+			<firstName>Timur</firstName>
+			<lastName>Bakirov</lastName>
+			<email>timur.bakirov@example.com</email>
+			<address>
+				<street>Moskovskaya</street>
+				<building>23</building>
+				<apartment>14</apartment>
+			</address>
+		</user>
+		<user id="1009">
+			<firstName>Cholpon</firstName>
+			<lastName>Kadyrova</lastName>
+			<email>cholpon.kadyrova@example.com</email>
+			<address>
+				<street>Kievskaya</street>
+				<building>41</building>
+				<apartment>9</apartment>
+			</address>
+		</user>
+		<user id="1010">
+			<firstName>Erbol</firstName>
+			<lastName>Nazarov</lastName>
+			<email>erbol.nazarov@example.com</email>
+			<address>
+				<street>Pushkin</street>
+				<building>76</building>
+				<apartment>18</apartment>
+			</address>
+		</user>
+		<user id="1011">
+			<firstName>Zarina</firstName>
+			<lastName>Samatova</lastName>
+			<email>zarina.samatova@example.com</email>
+			<address>
+				<street>Gagarin</street>
+				<building>29</building>
+				<apartment>6</apartment>
+			</address>
+		</user>
+		<user id="1012">
+			<firstName>Kanybek</firstName>
+			<lastName>Toktogulov</lastName>
+			<email>kanybek.toktogulov@example.com</email>
+			<address>
+				<street>Bokonbaeva</street>
+				<building>88</building>
+				<apartment>22</apartment>
+			</address>
+		</user>
+		<user id="1013">
+			<firstName>Dinara</firstName>
+			<lastName>Ysmailova</lastName>
+			<email>dinara.ysmailova@example.com</email>
+			<address>
+				<street>Almatinskaya</street>
+				<building>17</building>
+				<apartment>13</apartment>
+			</address>
+		</user>
+		<user id="1014">
+			<firstName>Sanjar</firstName>
+			<lastName>Rakhmanov</lastName>
+			<email>sanjar.rakhmanov@example.com</email>
+			<address>
+				<street>Tynystanova</street>
+				<building>63</building>
+				<apartment>27</apartment>
+			</address>
+		</user>
+		<user id="1015">
+			<firstName>Ainura</firstName>
+			<lastName>Shukurova</lastName>
+			<email>ainura.shukurova@example.com</email>
+			<address>
+				<street>Isanova</street>
+				<building>39</building>
+				<apartment>16</apartment>
+			</address>
+		</user>
+		<user id="1016">
+			<firstName>Maksat</firstName>
+			<lastName>Kalenov</lastName>
+			<email>maksat.kalenov@example.com</email>
+			<address>
+				<street>Baytik</street>
+				<building>71</building>
+				<apartment>24</apartment>
+			</address>
+		</user>
+		<user id="1017">
+			<firstName>Elmira</firstName>
+			<lastName>Batyrbekova</lastName>
+			<email>elmira.batyrbekova@example.com</email>
+			<address>
+				<street>JibekJolu</street>
+				<building>52</building>
+				<apartment>10</apartment>
+			</address>
+		</user>
+		<user id="1018">
+			<firstName>Aigerim</firstName>
+			<lastName>Kasymova</lastName>
+			<email>aigerim.kasymova@example.com</email>
+			<address>
+				<street>Salieva</street>
+				<building>94</building>
+				<apartment>28</apartment>
+			</address>
+		</user>
+		<user id="1019">
+			<firstName>Bektur</firstName>
+			<lastName>Asanov</lastName>
+			<email>bektur.asanov@example.com</email>
+			<address>
+				<street>Chuy</street>
+				<building>26</building>
+				<apartment>5</apartment>
+			</address>
+		</user>
+	</users>
+</userRepository>

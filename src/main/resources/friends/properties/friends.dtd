@@ -1,0 +1,16 @@
+<!ELEMENT friendList (friend+)>
+<!ELEMENT friend (firstName, lastName, phoneNumber, dateOfBirth, address, email)>
+<!ATTLIST friend id ID #REQUIRED>
+
+<!ELEMENT firstName (#PCDATA)>
+<!ELEMENT lastName (#PCDATA)>
+<!ELEMENT phoneNumber (#PCDATA)>
+<!ELEMENT dateOfBirth (day, month, year)>
+<!ELEMENT day (#PCDATA)>
+<!ELEMENT month (#PCDATA)>
+<!ELEMENT year (#PCDATA)>
+<!ELEMENT address (street, building, apartment)>
+<!ELEMENT street (#PCDATA)>
+<!ELEMENT building (#PCDATA)>
+<!ELEMENT apartment (#PCDATA)>
+<!ELEMENT email (#PCDATA)>
