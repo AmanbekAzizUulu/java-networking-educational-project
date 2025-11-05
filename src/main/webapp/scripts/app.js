@@ -1,284 +1,305 @@
-// Initialize application when DOM is loaded
-document.addEventListener('DOMContentLoaded', function () {
-	initializeApp();
-	enhanceWithNerdFonts();
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize the application
+    initApp();
 });
 
-function initializeApp() {
-	setCopyrightYear();
-	setupContactForm();
-	setupSmoothScrolling();
-	setupFormValidation();
+function initApp() {
+    initializeNavigation();
+    initializeRoleSelection();
+    initializeModals();
+    initializeAnimations();
+    initializeSmoothScroll();
 }
 
-// Enhance UI with Nerd Font icons
-function enhanceWithNerdFonts() {
-	// Add Nerd Font icons to specific elements if needed
-	const brandElement = document.querySelector('.brand');
-	if (brandElement) {
-		// You can add icons to brand if desired
-		// brandElement.innerHTML = '&#xf489; ' + brandElement.innerHTML;
-	}
+// Navigation functionality
+function initializeNavigation() {
+    const hamburger = document.querySelector('.hamburger');
+    const navMenu = document.querySelector('.nav-menu');
+    const navActions = document.querySelector('.nav-actions');
 
-	// Add icons to navigation items
-	const navItems = document.querySelectorAll('nav a');
-	navItems.forEach(item => {
-		const text = item.textContent;
-		if (text.includes('Services')) {
-			// item.innerHTML = '&#xf0c2; ' + item.innerHTML; // nf-oct-gear
-		} else if (text.includes('About')) {
-			// item.innerHTML = '&#xf468; ' + item.innerHTML; // nf-oct-person
-		} else if (text.includes('Contact')) {
-			// item.innerHTML = '&#xf0e0; ' + item.innerHTML; // nf-oct-mail
-		}
-	});
+    if (hamburger) {
+        hamburger.addEventListener('click', function() {
+            this.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            navActions.classList.toggle('active');
+        });
+    }
 
-	// Add icons to service cards
-	const serviceCards = document.querySelectorAll('.card strong');
-	serviceCards.forEach(card => {
-		const serviceName = card.textContent;
-		if (serviceName.includes('Web & Backend')) {
-			// card.innerHTML = '&#xf308; ' + card.innerHTML; // nf-oct-browser
-		} else if (serviceName.includes('Mobile & Frontend')) {
-			// card.innerHTML = '&#xf3cd; ' + card.innerHTML; // nf-oct-mobile
-		} else if (serviceName.includes('Cloud & DevOps')) {
-			// card.innerHTML = '&#xf0c2; ' + card.innerHTML; // nf-oct-gear
-		} else if (serviceName.includes('Consulting & QA')) {
-			// card.innerHTML = '&#xf468; ' + card.innerHTML; // nf-oct-person
-		}
-	});
+    // Navigation buttons
+    const navLoginBtn = document.getElementById('navLoginBtn');
+    const navRegisterBtn = document.getElementById('navRegisterBtn');
+
+    if (navLoginBtn) {
+        navLoginBtn.addEventListener('click', function() {
+            showRoleSelectionModal('login');
+        });
+    }
+
+    if (navRegisterBtn) {
+        navRegisterBtn.addEventListener('click', function() {
+            showRoleSelectionModal('register');
+        });
+    }
 }
 
-// Set current year in footer
-function setCopyrightYear() {
-	const yearElement = document.getElementById('year');
-	if (yearElement) {
-		yearElement.textContent = new Date().getFullYear();
-	}
+// Role selection functionality
+function initializeRoleSelection() {
+    const roleCards = document.querySelectorAll('.role-card');
+    const roleLoginButtons = document.querySelectorAll('.role-login');
+    const roleRegisterButtons = document.querySelectorAll('.role-register');
+
+    // Role card selection
+    roleCards.forEach(card => {
+        card.addEventListener('click', function() {
+            // Remove selected class from all cards
+            roleCards.forEach(c => c.classList.remove('selected'));
+            // Add selected class to clicked card
+            this.classList.add('selected');
+        });
+    });
+
+    // Role-specific login buttons
+    roleLoginButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const role = this.getAttribute('data-role');
+            redirectToLogin(role);
+        });
+    });
+
+    // Role-specific register buttons
+    roleRegisterButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const role = this.getAttribute('data-role');
+            redirectToRegister(role);
+        });
+    });
+
+    // Hero section buttons
+    const heroRegisterBtn = document.getElementById('heroRegisterBtn');
+    const heroDemoBtn = document.getElementById('heroDemoBtn');
+
+    if (heroRegisterBtn) {
+        heroRegisterBtn.addEventListener('click', function() {
+            showRoleSelectionModal('register');
+        });
+    }
+
+    if (heroDemoBtn) {
+        heroDemoBtn.addEventListener('click', function() {
+            showDemoModal();
+        });
+    }
+
+    // CTA buttons
+    const ctaRegisterBtn = document.getElementById('ctaRegisterBtn');
+    const ctaContactBtn = document.getElementById('ctaContactBtn');
+
+    if (ctaRegisterBtn) {
+        ctaRegisterBtn.addEventListener('click', function() {
+            showRoleSelectionModal('register');
+        });
+    }
+
+    if (ctaContactBtn) {
+        ctaContactBtn.addEventListener('click', function() {
+            showDemoModal();
+        });
+    }
 }
 
-// Setup contact form handling
-function setupContactForm() {
-	const contactForm = document.getElementById('contact');
-	if (contactForm) {
-		contactForm.addEventListener('submit', handleFormSubmit);
-	}
+// Modal functionality
+function initializeModals() {
+    const demoModal = document.getElementById('demoModal');
+    const closeButtons = document.querySelectorAll('.close');
+
+    // Close modal when clicking X
+    closeButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            demoModal.style.display = 'none';
+        });
+    });
+
+    // Close modal when clicking outside
+    window.addEventListener('click', function(event) {
+        if (event.target === demoModal) {
+            demoModal.style.display = 'none';
+        }
+    });
+
+    // Demo form submission
+    const demoForm = document.querySelector('.demo-form');
+    if (demoForm) {
+        demoForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            // In a real app, you would send this data to your server
+            alert('Спасибо! Наш специалист свяжется с вами в ближайшее время.');
+            demoModal.style.display = 'none';
+            this.reset();
+        });
+    }
 }
 
-// Handle form submission with validation
-function handleFormSubmit(e) {
-	e.preventDefault();
+// Animation functionality
+function initializeAnimations() {
+    // Add scroll animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
 
-	if (validateForm()) {
-		// Form is valid, you can proceed with submission
-		submitForm();
-	}
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-in');
+            }
+        });
+    }, observerOptions);
+
+    // Observe elements for animation
+    const animatedElements = document.querySelectorAll('.feature-card, .role-card, .stat-item');
+    animatedElements.forEach(el => {
+        observer.observe(el);
+    });
 }
 
-// Validate form fields
-function validateForm() {
-	const email = document.querySelector('input[type="email"]').value.trim();
-	const message = document.querySelector('textarea').value.trim();
-	const name = document.querySelector('input[name="name"]').value.trim();
+// Smooth scroll functionality
+function initializeSmoothScroll() {
+    const navLinks = document.querySelectorAll('a[href^="#"]');
 
-	let isValid = true;
-	let errorMessage = '';
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
 
-	// Clear previous error styles
-	clearErrorStyles();
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
 
-	// Validate name
-	if (!name) {
-		markFieldError('input[name="name"]');
-		errorMessage += '• Please provide your name\n';
-		isValid = false;
-	}
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                const offsetTop = targetElement.offsetTop - 80;
 
-	// Validate email
-	if (!email) {
-		markFieldError('input[type="email"]');
-		errorMessage += '• Please provide an email address\n';
-		isValid = false;
-	} else if (!isValidEmail(email)) {
-		markFieldError('input[type="email"]');
-		errorMessage += '• Please provide a valid email address\n';
-		isValid = false;
-	}
-
-	// Validate message
-	if (!message) {
-		markFieldError('textarea');
-		errorMessage += '• Please provide a project description\n';
-		isValid = false;
-	} else if (message.length < 10) {
-		markFieldError('textarea');
-		errorMessage += '• Please provide a more detailed project description\n';
-		isValid = false;
-	}
-
-	if (!isValid) {
-		showError(errorMessage);
-	}
-
-	return isValid;
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
 }
 
-// Check if email is valid
-function isValidEmail(email) {
-	const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-	return emailRegex.test(email);
+// Show role selection modal
+function showRoleSelectionModal(action) {
+    // In a real app, this would show a modal for role selection
+    // For now, we'll use the existing role cards section
+    const roleSection = document.querySelector('.role-section');
+    if (roleSection) {
+        roleSection.scrollIntoView({ behavior: 'smooth' });
+
+        // Highlight the action
+        setTimeout(() => {
+            alert(`Пожалуйста, выберите вашу роль для ${action === 'login' ? 'входа' : 'регистрации'}`);
+        }, 500);
+    }
 }
 
-// Mark field with error style
-function markFieldError(selector) {
-	const field = document.querySelector(selector);
-	if (field) {
-		field.style.borderColor = '#dc2626';
-		field.style.backgroundColor = '#fef2f2';
-	}
+// Show demo modal
+function showDemoModal() {
+    const demoModal = document.getElementById('demoModal');
+    if (demoModal) {
+        demoModal.style.display = 'block';
+    }
 }
 
-// Clear all error styles
-function clearErrorStyles() {
-	const fields = document.querySelectorAll('input, textarea');
-	fields.forEach(field => {
-		field.style.borderColor = '';
-		field.style.backgroundColor = '';
-	});
+// Redirect to login page
+function redirectToLogin(role) {
+    // In a real app, this would redirect to the actual login page
+    // For demo purposes, we'll show an alert
+    const roleNames = {
+        'patient': 'пациента',
+        'doctor': 'врача',
+        'admin': 'администратора'
+    };
+
+    alert(`Переход на страницу входа для ${roleNames[role]}`);
+    console.log(`Redirecting to login page for: ${role}`);
+
+    // Actual redirect would be:
+    // window.location.href = `login.html?role=${role}`;
 }
 
-// Show error message
-function showError(message) {
-	// Remove existing error message
-	const existingError = document.querySelector('.error-message');
-	if (existingError) {
-		existingError.remove();
-	}
+// Redirect to register page
+function redirectToRegister(role) {
+    // In a real app, this would redirect to the actual register page
+    // For demo purposes, we'll show an alert
+    const roleNames = {
+        'patient': 'пациента',
+        'doctor': 'врача',
+        'admin': 'администратора'
+    };
 
-	// Create new error message
-	const errorDiv = document.createElement('div');
-	errorDiv.className = 'error-message';
-	errorDiv.style.cssText = `
-        background: #fef2f2;
-        border: 1px solid #fecaca;
-        color: #dc2626;
-        padding: 12px;
-        border-radius: 8px;
-        margin-bottom: 16px;
-        white-space: pre-line;
-        font-size: 0.9rem;
-    `;
-	errorDiv.textContent = message;
+    alert(`Переход на страницу регистрации для ${roleNames[role]}`);
+    console.log(`Redirecting to register page for: ${role}`);
 
-	const form = document.getElementById('contact');
-	form.insertBefore(errorDiv, form.firstChild);
-
-	// Scroll to error message
-	errorDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    // Actual redirect would be:
+    // window.location.href = `register.html?role=${role}`;
 }
 
-// Submit form (mock implementation)
-function submitForm() {
-	const form = document.getElementById('contact');
-	const formData = new FormData(form);
+// Add some CSS for animations
+const style = document.createElement('style');
+style.textContent = `
+    .animate-in {
+        animation: fadeInUp 0.6s ease forwards;
+    }
 
-	// Show loading state
-	const submitButton = form.querySelector('button[type="submit"]');
-	const originalText = submitButton.textContent;
-	submitButton.textContent = 'Sending...';
-	submitButton.disabled = true;
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
 
-	// Simulate API call
-	setTimeout(() => {
-		// In real application, you would send data to server
-		console.log('Form submitted with data:', Object.fromEntries(formData));
+    .feature-card,
+    .role-card,
+    .stat-item {
+        opacity: 0;
+    }
 
-		// Show success message
-		showSuccessMessage();
+    .nav-menu.active,
+    .nav-actions.active {
+        display: flex !important;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: white;
+        box-shadow: var(--shadow);
+        padding: 1rem;
+    }
 
-		// Reset form
-		form.reset();
+    .hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
 
-		// Restore button
-		submitButton.textContent = originalText;
-		submitButton.disabled = false;
-	}, 1500);
-}
+    .hamburger.active span:nth-child(2) {
+        opacity: 0;
+    }
 
-// Show success message
-function showSuccessMessage() {
-	// Remove existing messages
-	const existingMessage = document.querySelector('.success-message, .error-message');
-	if (existingMessage) {
-		existingMessage.remove();
-	}
+    .hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+    }
 
-	const successDiv = document.createElement('div');
-	successDiv.className = 'success-message';
-	successDiv.style.cssText = `
-        background: #f0fdf4;
-        border: 1px solid #bbf7d0;
-        color: #16a34a;
-        padding: 12px;
-        border-radius: 8px;
-        margin-bottom: 16px;
-        font-size: 0.9rem;
-    `;
-	successDiv.textContent = 'Thank you! Your message has been sent. We\'ll get back to you soon.';
-
-	const form = document.getElementById('contact');
-	form.insertBefore(successDiv, form.firstChild);
-
-	// Scroll to success message
-	successDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
-}
-
-// Setup smooth scrolling for anchor links
-function setupSmoothScrolling() {
-	const anchorLinks = document.querySelectorAll('a[href^="#"]');
-
-	anchorLinks.forEach(link => {
-		link.addEventListener('click', function (e) {
-			const href = this.getAttribute('href');
-
-			if (href !== '#') {
-				e.preventDefault();
-				const target = document.querySelector(href);
-
-				if (target) {
-					const headerHeight = document.querySelector('header').offsetHeight;
-					const targetPosition = target.offsetTop - headerHeight - 20;
-
-					window.scrollTo({
-						top: targetPosition,
-						behavior: 'smooth'
-					});
-				}
-			}
-		});
-	});
-}
-
-// Setup real-time form validation
-function setupFormValidation() {
-	const formFields = document.querySelectorAll('#contact input, #contact textarea');
-
-	formFields.forEach(field => {
-		field.addEventListener('input', function () {
-			// Clear error styles when user starts typing
-			this.style.borderColor = '';
-			this.style.backgroundColor = '';
-
-			// Remove error message if all fields are valid
-			const errorMessage = document.querySelector('.error-message');
-			if (errorMessage) {
-				const email = document.querySelector('input[type="email"]').value.trim();
-				const message = document.querySelector('textarea').value.trim();
-
-				if (email && message && isValidEmail(email)) {
-					errorMessage.remove();
-				}
-			}
-		});
-	});
-}
+    @media (max-width: 768px) {
+        .nav-menu,
+        .nav-actions {
+            display: none;
+        }
+    }
+`;
+document.head.appendChild(style);
