@@ -13,14 +13,20 @@ public class IndexServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		Enumeration<String> headerNames = req.getHeaderNames();
+		Enumeration<String> parameterNames = req.getParameterNames();
 
-		System.out.println("----------======== \nAll headers from request\n ========----------");
-		while (headerNames.hasMoreElements()) {
-			var headerName = headerNames.nextElement();
-			var headerValue = req.getHeader(headerName);
+		System.out.println("\n---=== PARAMETERS ===---");
+		while (parameterNames.hasMoreElements()) {
+			String name = parameterNames.nextElement();
+			String[] values = req.getParameterValues(name);
 
-			System.out.println(headerName + " : " + headerValue);
+			System.out.print(name + " : ");
+			if (values != null) {
+				for (String value : values) {
+					System.out.print(value + " ");
+				}
+				System.out.println();
+			}
 		}
 
 		RequestDispatcher requestDispatcher = req.getRequestDispatcher("/index.html");
