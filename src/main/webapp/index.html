@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<title>Dandaev IT — Software Development & Consulting</title>
+	<meta name="description"
+		content="Dandaev IT — custom software, web & mobile development, DevOps and IT consulting." />
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body>
+	<header>
+		<div class="container nav">
+			<a class="brand" href="/">
+				<div class="logo">DI</div>
+				<div>
+					<div style="font-weight:800">Dandaev IT</div>
+					<div style="font-size:0.82rem;color:var(--muted);margin-top:2px">Custom software & consulting</div>
+				</div>
+			</a>
+			<nav>
+				<ul>
+					<li><a href="#services">Services</a></li>
+					<li><a href="#about">About</a></li>
+					<li><a href="#contact" class="cta">Contact</a></li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+
+	<main class="container">
+		<section class="hero">
+			<div class="hero-inner">
+				<h1>Build dependable software. Ship faster. Scale with confidence.</h1>
+				<p class="lead">Dandaev IT delivers web, mobile and cloud solutions tailored to your business. We
+					combine engineering excellence with pragmatic product thinking to turn ideas into reliable products.
+				</p>
+
+				<div class="grid">
+					<div class="card">
+						<strong>Web & Backend</strong>
+						<p style="color:var(--muted);margin:8px 0 0">Modern APIs, microservices, and resilient backend
+							systems using Java, Spring, Node.js or Go.</p>
+					</div>
+					<div class="card">
+						<strong>Mobile & Frontend</strong>
+						<p style="color:var(--muted);margin:8px 0 0">Responsive web apps and native/hybrid mobile apps
+							focused on performance and UX.</p>
+					</div>
+					<div class="card">
+						<strong>Cloud & DevOps</strong>
+						<p style="color:var(--muted);margin:8px 0 0">Cloud migrations, CI/CD, infrastructure as code and
+							cost-conscious architectures.</p>
+					</div>
+					<div class="card">
+						<strong>Consulting & QA</strong>
+						<p style="color:var(--muted);margin:8px 0 0">Architecture reviews, technical due diligence,
+							testing strategies and automation.</p>
+					</div>
+				</div>
+			</div>
+
+			<aside class="card" aria-labelledby="contact-heading">
+				<h3 id="contact-heading" style="margin:0 0 8px">Get in touch</h3>
+				<p style="color:var(--muted);margin:0 0 12px">Tell us about your project and we'll suggest the best
+					approach.</p>
+
+				<form id="contact" class="contact" action="/contact" method="post" novalidate>
+					<input type="text" name="name" placeholder="Your name" required />
+					<input type="email" name="email" placeholder="Email address" required />
+					<input type="text" name="company" placeholder="Company (optional)" />
+					<textarea name="message" rows="4" placeholder="Short description of the project"
+						required></textarea>
+					<button type="submit">Send message</button>
+				</form>
+
+				<div style="margin-top:12px;font-size:0.9rem;color:var(--muted)">
+					<div>Email: <a href="mailto:hello@dandaevit.example">hello@dandaevit.example</a></div>
+					<div style="margin-top:6px">Location: Remote / Based in Eastern Europe</div>
+				</div>
+			</aside>
+		</section>
+
+		<section id="about" style="margin-top:8px">
+			<div class="card">
+				<h3 style="margin-top:0">About Dandaev IT</h3>
+				<p style="color:var(--muted);margin:8px 0 0">We are a focused team of engineers and product thinkers
+					helping companies design, build and operate modern software. We emphasize good architecture,
+					automated testing, and clear delivery milestones so you get value quickly with low long-term
+					maintenance cost.</p>
+			</div>
+		</section>
+
+		<section id="services" class="services">
+			<div class="flex flex-wrap gap-18 mt-12">
+				<div class="card" style="flex:1 1 260px">
+					<strong>Custom Development</strong>
+					<p style="color:var(--muted);margin:8px 0 0">End-to-end product delivery from discovery to ongoing
+						support.</p>
+				</div>
+				<div class="card" style="flex:1 1 260px">
+					<strong>Cloud & Infra</strong>
+					<p style="color:var(--muted);margin:8px 0 0">AWS / GCP / Azure, IaC, monitoring, cost optimization.
+					</p>
+				</div>
+				<div class="card" style="flex:1 1 260px">
+					<strong>Architecture Reviews</strong>
+					<p style="color:var(--muted);margin:8px 0 0">Practical recommendations to improve reliability and
+						scalability.</p>
+				</div>
+			</div>
+		</section>
+
+		<footer>
+			<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+				<div>Dandaev IT — © <span id="year"></span></div>
+				<div style="color:var(--muted)">Built with focus on simplicity and quality.</div>
+			</div>
+		</footer>
+	</main>
+
+	<!-- JavaScript -->
+	<script src="scripts/app.js"></script>
+</body>
+
+</html>
